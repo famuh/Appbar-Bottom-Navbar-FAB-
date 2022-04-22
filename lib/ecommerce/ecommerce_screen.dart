@@ -1,5 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/ecommerce/favorite.dart';
+import 'package:flutter_application/ecommerce/notification.dart';
+import 'package:flutter_application/ecommerce/profile.dart';
 
 class ecommerceScreen extends StatefulWidget {
   ecommerceScreen({Key? key}) : super(key: key);
@@ -10,16 +13,21 @@ class ecommerceScreen extends StatefulWidget {
 
 class _ecommerceScreenState extends State<ecommerceScreen> {
   int _currentIndex = 0;
-  List _navigation = [
+  List _body = [
     //home
+    ecommerceScreen(),
 
     //favorite
+    favoriteScreen(),
 
     //notification
+    notificationScreen(),
 
     //profile
+    profileScreen()
+
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,14 +35,14 @@ class _ecommerceScreenState extends State<ecommerceScreen> {
         backgroundColor: Colors.grey[400],
         leading: IconButton(
           icon: Icon(Icons.person),
-          onPressed: (){
+          onPressed: () {
             print('Leading Pressed !');
           },
         ),
-        title: Image.asset('../assets/logo.png', width: 100,),
-        ),
+        title: Image.asset('../assets/logo.png', width: 100),
+      ),
 
-      body: Container(color: Colors.white30),
+      body: _body[_currentIndex],
 
       //bottom Navbar
       bottomNavigationBar: CurvedNavigationBar(
@@ -51,6 +59,7 @@ class _ecommerceScreenState extends State<ecommerceScreen> {
             _currentIndex = index;
             print('Current Index : ' + index.toString());
           });
+          print(index);
         },
       ),
       
